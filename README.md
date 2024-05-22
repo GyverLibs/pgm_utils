@@ -145,7 +145,18 @@ size_t length();
 PString operator[](int idx);
 ```
 
+### Примечание
+`PGM_STR_LIST(name, "str1", "str2")` разворачивается в:
+```cpp
+const char name_0[] PROGMEM = "str1";
+const char name_1[] PROGMEM = "str2";
+const char name_2[] PROGMEM = "str3";
+const char* const name[] = {name_0, name_1, name_2};
+```
+> Максимальное количество строк - `128`
+
 ### Примеры
+#### Значения
 ```cpp
 PGM_VAL(int, vali, 123);
 PGM_VAL(float, valf, 3.14);
@@ -166,6 +177,7 @@ void foo() {
 }
 ```
 
+#### Строки
 ```cpp
 PGM_STR(pgmstr, "hello");
 
@@ -185,6 +197,7 @@ void foo() {
 }
 ```
 
+#### Массивы
 ```cpp
 PGM_ARRAY(byte, pgmarrb, 1, 2, 3);              // pgm массив
 PGM_ARRAY(int, pgmarri, 123, 456, 789);         // pgm массив
@@ -205,6 +218,7 @@ void foo() {
 }
 ```
 
+#### Массивы строк
 ```cpp
 PGM_STR_LIST(pstrlist, "string 1", "kek", "hello");
 PGM_STR_LIST_OBJ(pstrlist_obj, "str1", "str2", "str3");
