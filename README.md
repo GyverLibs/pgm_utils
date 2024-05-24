@@ -146,7 +146,7 @@ PString operator[](int idx);
 ```
 
 ### Примечание
-`PGM_STR_LIST(name, "str1", "str2")` разворачивается в:
+`PGM_STR_LIST(name, "str1", "str2", "str3")` разворачивается в:
 ```cpp
 const char name_0[] PROGMEM = "str1";
 const char name_1[] PROGMEM = "str2";
