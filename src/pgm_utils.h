@@ -110,12 +110,12 @@ class Array {
     Array(const T* arr, size_t len = 0) : _arr(arr), _len(len) {}
 
     // длина массива. 0 если не указана при инициализации
-    size_t length() {
+    size_t length() const {
         return _len;
     }
 
     // получить значение по индексу
-    T operator[](int idx) {
+    T operator[](int idx) const {
         return pgm_read(_arr + idx);
     }
 
@@ -131,12 +131,12 @@ class ArrayList {
     ArrayList(const T* const* const arr, size_t len = 0) : _arr(arr), _len(len) {}
 
     // длина массива. 0 если не указана при инициализации
-    size_t length() {
+    size_t length() const {
         return _len;
     }
 
     // прочитать массив как pgm::Array по индексу
-    Array<T> operator[](int idx) {
+    Array<T> operator[](int idx) const {
         return (const T*)pgm_read_ptr(_arr + idx);
     }
 
@@ -161,52 +161,52 @@ class PString : public Printable {
     }
 
     // вывести в char[]
-    void toStr(char* buf) {
+    void toStr(char* buf) const {
         strcpy_P(buf, pstr);
     }
 
     // вывести в String
-    String toString(char* buf) {
+    String toString(char* buf) const {
         return String(f_str());
     }
 
     // сравнить со строкой
-    bool compare(const char* str) {
+    bool compare(const char* str) const {
         return !strcmp_P(str, pstr);
     }
 
-    bool operator==(const char* str) {
+    bool operator==(const char* str) const {
         return compare(str);
     }
 
     // сравнить со строкой
-    bool compare(const String& str) {
+    bool compare(const String& str) const {
         return compare(str.c_str());
     }
 
-    bool operator==(const String& str) {
+    bool operator==(const String& str) const {
         return compare(str);
     }
 
     // получить как FlashStringHelper*
-    FSTR f_str() {
+    FSTR f_str() const {
         return FPSTR(pstr);
     }
 
     // получить символ
-    char operator[](int idx) {
+    char operator[](int idx) const {
         return pgm_read_byte(pstr + idx);
     }
 
-    operator PGM_P() {
+    operator PGM_P() const {
         return pstr;
     }
 
-    operator FSTR() {
+    operator FSTR() const {
         return FPSTR(pstr);
     }
 
-    operator String() {
+    operator String() const {
         return f_str();
     }
 
@@ -223,12 +223,12 @@ class StringList {
     StringList(const char* const* const arr, size_t len = 0) : _arr(arr), _len(len) {}
 
     // длина массива. 0 если не указана при инициализации
-    size_t length() {
+    size_t length() const {
         return _len;
     }
 
     // получить строку
-    PString operator[](int idx) {
+    PString operator[](int idx) const {
         return (PGM_P)pgm_read_ptr(_arr + idx);
     }
 
