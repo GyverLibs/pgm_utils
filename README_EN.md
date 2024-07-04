@@ -202,7 +202,7 @@ VOID FOO () {
 PGM :: Array <Byte> arrb (pgmarrb);
 Serial.println (arrb [1]);// 2
 
-// length is counted in Make
+// length is counted in MAKE
 PGM :: Array <THet> arri = make_array (int, pgmarri);
 Serial.println (arri [1]);// 456
 Serial.println (arri.length ());// 3
