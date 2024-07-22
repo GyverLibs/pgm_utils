@@ -1,4 +1,4 @@
-num = 128
+num = 512
 
 txt = """
 #pragma once
