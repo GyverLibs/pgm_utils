@@ -153,7 +153,7 @@ const char name_1[] PROGMEM = "str2";
 const char name_2[] PROGMEM = "str3";
 const char* const name[] = {name_0, name_1, name_2};
 ```
-> Максимальное количество строк - `128`
+> Максимальное количество строк - `512`
 
 ### Примеры
 #### Значения
