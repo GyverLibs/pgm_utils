@@ -1,8 +1,7 @@
 #pragma once
 #include <Arduino.h>
+#include <FOR_MACRO.h>
 #include <limits.h>
-
-#include "for.h"
 
 // =================== PUT ===================
 
@@ -24,8 +23,8 @@
 
 // поместить строки в PROGMEM и в список указателей под именем name
 #define PGM_STR_LIST(name, ...)          \
-    PU_FOR(_MAKE_STR, name, __VA_ARGS__) \
-    const char* const name[] PROGMEM = {PU_FOR(_MAKE_LIST, name, __VA_ARGS__)};
+    FOR_MACRO(_MAKE_STR, name, __VA_ARGS__) \
+    const char* const name[] PROGMEM = {FOR_MACRO(_MAKE_LIST, name, __VA_ARGS__)};
 
 // поместить строки в PROGMEM и в список указателей + создать объект StringList с именем name
 #define PGM_STR_LIST_OBJ(name, ...)        \
