@@ -13,17 +13,23 @@
 // поместить одиночное значение val типа T (класс, структура) в PROGMEM под именем name, передать список для инициализации
 #define PGM_STRUCT(T, name, ...) const T name PROGMEM = {__VA_ARGS__};
 
-// STR
+// =================== STR ===================
 
 // поместить строку str в PROGMEM под именем name
 #define PGM_STR(name, str) const char name[] PROGMEM = str;
 
 #define _MAKE_STR(N, i, name, val) const char name##_##i[] PROGMEM = val;
+#define _MAKE_STR_STATIC(N, i, name, val) static const char name##_##i[] PROGMEM = val;
 #define _MAKE_LIST(N, i, name, val) name##_##i,
 
 // поместить строки в PROGMEM и в список указателей под именем name
-#define PGM_STR_LIST(name, ...)          \
+#define PGM_STR_LIST(name, ...)             \
     FOR_MACRO(_MAKE_STR, name, __VA_ARGS__) \
+    const char* const name[] PROGMEM = {FOR_MACRO(_MAKE_LIST, name, __VA_ARGS__)};
+
+// поместить строки в PROGMEM и в список указателей под именем name
+#define PGM_STR_LIST_STATIC(name, ...)             \
+    FOR_MACRO(_MAKE_STR_STATIC, name, __VA_ARGS__) \
     const char* const name[] PROGMEM = {FOR_MACRO(_MAKE_LIST, name, __VA_ARGS__)};
 
 // поместить строки в PROGMEM и в список указателей + создать объект StringList с именем name
@@ -31,10 +37,15 @@
     PGM_STR_LIST(name##_list, __VA_ARGS__) \
     pgm::StringList name(name##_list, sizeof(name##_list) / sizeof(const char*));
 
+// поместить строки в PROGMEM и в список указателей + создать объект StringList с именем name
+#define PGM_STR_LIST_OBJ_STATIC(name, ...)        \
+    PGM_STR_LIST_STATIC(name##_list, __VA_ARGS__) \
+    pgm::StringList name(name##_list, sizeof(name##_list) / sizeof(const char*));
+
 // создать объект pgm::StringList с посчитанным количеством строк
 #define MAKE_STR_LIST(name) pgm::StringList(name, sizeof(name) / sizeof(const char*));
 
-// ARR
+// =================== ARR ===================
 
 // поместить массив типа T в PROGMEM под именем name
 #define PGM_ARRAY(T, name, ...) const T name[] PROGMEM = {__VA_ARGS__};

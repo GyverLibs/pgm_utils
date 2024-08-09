@@ -43,10 +43,12 @@ PGM_STR(name, str)
 
 // поместить строки в PROGMEM и в список указателей под именем name
 PGM_STR_LIST(name, ...)
+PGM_STR_LIST_STATIC(name, ...)
 
 // поместить строки в PROGMEM и в список указателей + создать объект StringList с именем name
 // создаст progmem массив name_list и строки name_list_0, ... name_list_n
 PGM_STR_LIST_OBJ(name, ...)
+PGM_STR_LIST_OBJ_STATIC(name, ...)
 
 // создать объект pgm::StringList с посчитанным количеством строк
 MAKE_STR_LIST(name)
