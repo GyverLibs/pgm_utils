@@ -1,270 +1,280 @@
-This is an automatic translation, may be incorrect in some places. See sources and examples!
+This is an automatic translation and may be incorrect in some places. See the source README and examples for authoritative information.
+
+[![latest](https://img.shields.io/github/v/release/GyverLibs/pgm_utils.svg?color=brightgreen)](https://github.com/GyverLibs/pgm_utils/releases/latest/download/pgm_utils.zip)
+[![PIO](https://badges.registry.platformio.org/packages/gyverlibs/library/pgm_utils.svg)](https://registry.platformio.org/libraries/gyverlibs/pgm_utils)
+[![Foo](https://img.shields.io/badge/Website-AlexGyver.ru-blue.svg?style=flat-square)](https://alexgyver.ru/)
+[![Foo](https://img.shields.io/badge/%E2%82%BD%24%E2%82%AC%20%D0%9F%D0%BE%D0%B4%D0%B4%D0%B5%D1%80%D0%B6%D0%B0%D1%82%D1%8C-%D0%B0%D0%B2%D1%82%D0%BE%D1%80%D0%B0-orange.svg?style=flat-square)](https://alexgyver.ru/support_alex/)
+[![Foo](https://img.shields.io/badge/README-ENGLISH-blueviolet.svg?style=flat-square)](https://github-com.translate.goog/GyverLibs/pgm_utils?_x_tr_sl=ru&_x_tr_tl=en)  
+
+[![Foo](https://img.shields.io/badge/ПОДПИСАТЬСЯ-НА%20ОБНОВЛЕНИЯ-brightgreen.svg?style=social&logo=telegram&color=blue)](https://t.me/GyverLibs)
 
 # pgm_utils
-A set of convenient tools for working with Progmem, C ++ wrapping for standard PGM functions
-- one function for reading any data
+A set of convenient tools for working with PROGMEM, C++ wrapper for standard pgm functions
+- One function to read any data
 - Reading multidimensional arrays
-- Reading the array of lines
+- Reading an array of lines
 
-## compatibility
-Compatible with all arduino platforms (used arduino functions)
+### Compatibility
+Compatible with all Arduino platforms (Arduino features are used)
 
-## Content
-- [use] (#usage)
-- [versions] (#varsions)
-- [installation] (# Install)
-- [bugs and feedback] (#fedback)
+## Contents
+- [Use of use](#usage)
+- [Versions](#versions)
+- [Installation](#install)
+- [Bugs and feedback](#feedback)
 
-<a id="usage"> </a>
+<a id="usage"></a>
 
-## Usage
-### macros and functions
-`` `CPP
-// Synonym Constring __flashstringhelper*
+## Use of use
+### Macros and functions
+```cpp
+// synonym for const   FlashStringHelper*
 FSTR
 
-// Transform pgm_p to fstr
-Fpstr (x)
+// Convert PGM P to FSTR
+FPSTR(x)
 
-// Place the single value of VAL type t in Progmem under the name NAME
-PGM_VAL (T, NAME, VAL)
+// Put a single value of val type T in PROGMEM under the name
+PGM_VAL(T, name, val)
 
-// Place a single value of VAL type t (class, structure) in Progmem under the name NAME, transfer the list for initialization
-Pgm_struct (t, name, ...)
+// place a single value of val type T (class, structure) in PROGMEM under the name, transfer the list for initialization
+PGM_STRUCT(T, name, ...)
 
-// Place the string string in Progmem under the name NAME
-Pgm_str (name, str)
+// Put str in PROGMEM under the name
+PGM_STR(name, str)
 
-// Place the lines in Progmem and in the list of signs under the name NAME
-Pgm_str_list (name, ...)
+// place the lines in PROGMEM and in the list of pointers under the name
+PGM_STR_LIST(name, ...)
+PGM_STR_LIST_STATIC(name, ...)
 
-// Place the lines in Progmem and in the list of signs + create an object Stringlist with the name NAME
-// Create a Progmem massif NAME_LIST and lines NAME_LIST_0, ... NAME_LIST_N
-Pgm_str_list_obj (name, ...)
+// put strings in PROGMEM and in the list of pointers + create a StringList object with the name
+// will create a progmem array name list and the lines name list 0, ... name list   n
+PGM_STR_LIST_OBJ(name, ...)
+PGM_STR_LIST_OBJ_STATIC(name, ...)
 
-// Create an object pgm :: Stringlist with a calculated number of lines
-Make_str_list (name)
+// Create a pgm::StringList object with the number of rows counted
+MAKE_STR_LIST(name)
 
-// Place an array of type t in progmem under the name NAME
-Pgm_array (t, name, ...)
+// Place a Type T Array in PROGMEM under the name
+PGM_ARRAY(T, name, ...)
 
-// Place arrays of type T in the Progmem array of signs under the name NAME
-Pgm_array_list (t, name, ...)
+// Place type T arrays in PROGMEM array of pointers under the name
+PGM_ARRAY_LIST(T, name, ...)
 
-// Create an object pgm :: type T with the calculated array calculated
-Make_array (t, name)
+// create a pgm::Array type T object with a calculated array length
+MAKE_ARRAY(T, name)
 
-// Create a Progmem Massive type T and an object of class PGM :: Array from it
-// Create a Progmem massif name_arr
-Pgm_array_obj (t, name, ...)
+// Create a PROGMEM array of type T and a pgm class name object:::Array
+// Create a progme array name arr
+PGM_ARRAY_OBJ(T, name, ...)
 
-// Read data of any type
-T pgm_read (const t* ptr);
-`` `
+// read out
+T pgm_read(const T* ptr);
+```
 
-### classes
-#### `Template <Typename T> PGM :: Array`
-Reading one -dimensional array
+### Classes
+#### `template <typename T> pgm::Array`
+Reading a one-dimensional array
 
-`` `CPP
-Array (const* arr, size_t len ​​= 0);
+```cpp
+Array(const T* arr, size_t len = 0);
 
-// The length of the array.0 If not indicated during initialization
-Size_t Length ();
+// Array length. 0 if not specified at initialization
+size_t length();
 
-// Get a value by index
-T Operator [] (int IDX);
-`` `
+// index
+T operator[](int idx);
+```
 
-### `Template <Typename T> PGM :: ArrayList`
-Reading an array of array of indicators for arrays
+#### `template <typename T> pgm::ArrayList`
+Reading an array of pointers to arrays
 
-`` `CPP
-Arraylist (const t ** arr, size_t len ​​= 0);
+```cpp
+ArrayList(const T** arr, size_t len = 0);
 
-// The length of the array.0 If not indicated during initialization
-Size_t Length ();
+// Array length. 0 if not specified at initialization
+size_t length();
 
-// Read the array as pgm :: Array by index
-Array <t> operator [] (int IDX);
-`` `
+// read the array as pgm::Array by index
+Array<T> operator[](int idx);
+```
 
-### `pgm :: pstring`
-Working with Progemem a line
+#### `pgm::PString`
+Working with PROGEMEM string
 
-`` `CPP
-Pstring (pgm_p str, size_t len ​​= 0);
+```cpp
+PString(PGM_P str, size_t len = 0);
 
-// Print
-Size_t Printto (Print & P);
+// print out
+size_t printTo(Print& p);
 
-// Line length
-Size_t Length ();
+// line length
+size_t length();
 
-// Bring to Char []
-VOID TOSTR (Char* BUF);
+// char
+void toStr(char* buf);
 
-// Bring to String
-String Tostring ();
+// pull out
+String toString();
 
-// compare with the line
-Bool Compare (Consta Char* str);
-Bool Operator == (Consta Char* str);
+// line
+bool compare(const char* str);
+bool operator==(const char* str);
 
-// compare with the line
-Bool Compare (Constation String & STR);
-Bool Operator == (COST String & STR);
+// line
+bool compare(const String& str);
+bool operator==(const String& str);
 
-// Get like flashstringhelper*
-Fstr f_str ();
+// Get it as FlashStringHelper*
+FSTR f_str();
 
-// Get a symbol
-Char Operator [] (int IDX);
+// symbolize
+char operator[](int idx);
 
-Operator pgm_p ();
-Operator FSTR ();
-Pgm_p pstr;
-`` `
+operator PGM_P();
+operator FSTR();
+PGM_P pstr;
+```
 
-### `pgm :: stringlist`
-Working with an array of array of signs
+#### `pgm::StringList`
+Working with an array of lines from an array of pointers
 
-`` `CPP
-Stringlist (const char ** arr, size_t len ​​= 0);
+```cpp
+StringList(const char** arr, size_t len = 0);
 
-// The length of the array.0 If not indicated during initialization
-S.Ize_t Length ();
+// Array length. 0 if not specified at initialization
+size_t length();
 
-// Get a line
-Pstring Operator [] (int IDX);
-`` `
+// string
+PString operator[](int idx);
+```
 
 ### Note
-`Pgm_str_list (name," str1 "," str2 "," str3 ")` unfolds in:
-`` `CPP
-const char name_0 [] progmem = "str1";
-const char name_1 [] progmem = "str2";
-const char name_2 [] progmem = "str3";
-const char* const name [] = {name_0, name_1, name_2};
-`` `
-> Maximum number of lines - `128`
+`PGM_STR_LIST(name, "str1", "str2", "str3")`unfolds in:
+```cpp
+const char name_0[] PROGMEM = "str1";
+const char name_1[] PROGMEM = "str2";
+const char name_2[] PROGMEM = "str3";
+const char* const name[] = {name_0, name_1, name_2};
+```
+> Maximum number of lines -`512`
 
 ### Examples
-### values
-`` `CPP
-Pgm_val (int, vali, 123);
-PGM_VAL (FLOAT, VALF, 3.14);
+#### Meanings
+```cpp
+PGM_VAL(int, vali, 123);
+PGM_VAL(float, valf, 3.14);
 
-Struct test {
-byte i;
-Chard [10];
+struct Test {
+  byte i;
+  char str[10];
 };
-Pgm_struct (test, ptest, 10, "test");
+PGM_STRUCT(Test, ptest, 10, "test");
 
-VOID FOO () {
-Serial.println (pgm_read (& vali));// 123
-Serial.println (pgm_read (& valf));// 3.14
+void foo() {
+  Serial.println(pgm_read(&vali));  // 123
+  Serial.println(pgm_read(&valf));  // 3.14
 
-Test T = pgm_read (& ptest);
-Serial.println (T.I);// 10
-Serial.println (T.str);// test
+  Test t = pgm_read(&ptest);
+  Serial.println(t.i);    // 10
+  Serial.println(t.str);  // test
 }
-`` `
+```
 
-### lines
-`` `CPP
-PGM_STR (PGMSTR, "HELLO");
+#### Lines.
+```cpp
+PGM_STR(pgmstr, "hello");
 
-VOID FOO () {
-PGM :: pstring pstr (pgmstr);
-Serial.println (pstr);// Hello
-Serial.println (pstr.length ());// 5
-for (int i = 0; i <pstr.length (); i ++) {
-Serial.print (pstr [i]);
+void foo() {
+  pgm::PString pstr(pgmstr);
+  Serial.println(pstr);  //  hello
+  Serial.println(pstr.length());  // 5
+  for (int i = 0; i < pstr.length(); i++) {
+    Serial.print(pstr[i]);
+  }
+  Serial.println();
+
+  // Use f str() when working with String!
+  // It's best.
+  String s = pgmstr.f_str();
+  s += pgmstr.f_str();
 }
-Serial.println ();
+```
 
-// When working with String, use f_str ()!
-// This is the best of all
-String s = pgmstr.f_str ();
-s += pgmstr.f_str ();
+#### Arrays
+```cpp
+PGM_ARRAY(byte, pgmarrb, 1, 2, 3);              // pgm
+PGM_ARRAY(int, pgmarri, 123, 456, 789);         // pgm
+PGM_ARRAY_OBJ(float, arrf, 1.12, 2.34, 3.45);   // array + object pgm::Array
+
+void foo() {
+  // length unknown
+  pgm::Array<byte> arrb(pgmarrb);
+  Serial.println(arrb[1]); // 2
+  
+  // The length will be counted in Make.
+  pgm::Array<int> arri = MAKE_ARRAY(int, pgmarri);
+  Serial.println(arri[1]);        // 456
+  Serial.println(arri.length());  // 3
+ 
+  // ready-made
+  Serial.println(arrf[1]);  // 2.34
 }
-`` `
+```
 
-### MASSIVES
-`` `CPP
-Pgm_array (byte, pgmarrb, 1, 2, 3);// PGM massif
-Pgm_array (int, pgmarri, 123, 456, 789);// PGM massif
-Pgm_array_obj (Float, Arrf, 1.12, 2.34, 3.45);// Array + object PGM :: Array
+#### Arrays of lines
+```cpp
+PGM_STR_LIST(pstrlist, "string 1", "kek", "hello");
+PGM_STR_LIST_OBJ(pstrlist_obj, "str1", "str2", "str3");
 
-VOID FOO () {
-// The length is unknown
-PGM :: Array <Byte> arrb (pgmarrb);
-Serial.println (arrb [1]);// 2
+void foo() {
+  pgm::StringList list(pstrlist);
+  // pgm::StringList list = MAKE STR LIST(pstrlist) The length is known.
+  Serial.println(list.length());
+  Serial.println(list[1]);
+  Serial.println(list[1].length());
+  Serial.println(list[0] == "string 1");
 
-// length is counted in MAKE
-PGM :: Array <THet> arri = make_array (int, pgmarri);
-Serial.println (arri [1]);// 456
-Serial.println (arri.length ());// 3
-
-// Ready object
-Serial.println (arrf [1]);// 2.34
+  // str1, str2, str3
+  for (int i = 0; i < pstrlist_obj.length(); i++) {
+    Serial.println(pstrlist_obj[i]);
+  }
 }
-`` `
+```
 
-#### Arrays of the lines
-`` `CPP
-Pgm_str_list (pstrlist, "String 1", "Kek", "Hello");
-Pgm_str_list_obj (pstrlist_obj, "str1", "str2", "str3");
+<a id="versions"></a>
 
-VOID FOO () {
-PGM :: Stringlist List (Pstrlist);
-// pgm :: stringlist list = make_str_list (pstrlist);// here the length is known
-Serial.println (list.length ());
-Serial.println (list [1]);
-Serial.println (list [1] .Length ());
-Serial.println (list [0] == "string 1");
+## Versions
+- v1.0
 
-// str1, str2, str3
-for (int i = 0; i <pstrlist_obj.length (); i ++) {
-Serial.println (pstrlist_obj [i]);
-}
-}
-`` `
-
-<a id="versions"> </a>
-
-## versions
-- V1.0
-
-<a id="install"> </a>
+<a id="install"></a>
 ## Installation
-- The library can be found by the name ** pgm_utils ** and installed through the library manager in:
-- Arduino ide
-- Arduino ide v2
-- Platformio
-- [download the library] (https://github.com/gyverlibs/pgm_utils/archive/refs/heads/main.zip) .Zip archive for manual installation:
-- unpack and put in * C: \ Program Files (X86) \ Arduino \ Libraries * (Windows X64)
-- unpack and put in * C: \ Program Files \ Arduino \ Libraries * (Windows X32)
-- unpack and put in *documents/arduino/libraries/ *
-- (Arduino id) Automatic installation from. Zip: * sketch/connect the library/add .Zip library ... * and specify downloaded archive
-- Read more detailed instructions for installing libraries [here] (https://alexgyver.ru/arduino-first/#%D0%A3%D1%81%D1%82%D0%B0%BD%D0%BE%BE%BE%BED0%B2%D0%BA%D0%B0_%D0%B1%D0%B8%D0%B1%D0%BB%D0%B8%D0%BE%D1%82%D0%B5%D0%BA)
+- The library can be found under the name **pgm utils** and installed through the library manager in:
+    - Arduino IDE
+    - Arduino IDE v2
+    - PlatformIO
+- [Download the library](https://github.com/GyverLibs/pgm_utils/archive/refs/heads/main.zip).zip archive for manual installation:
+    - Unpack and put in *C:\Program Files (x86)\Arduino\libraries* (Windows x64)
+    - Unpack and put in *C:\Program Files\Arduino\libraries* (Windows x32)
+    - Unpack and put in *Documents/Arduino/libraries/ *
+    - (Arduino IDE) Automatic installation from .zip: *Sketch/Connect library/Add .ZIP library...* and specify downloaded archive
+- Read more detailed instructions for installing libraries[here](https://alexgyver.ru/arduino-first/#%D0%A3%D1%81%D1%82%D0%B0%D0%BD%D0%BE%D0%B2%D0%BA%D0%B0_%D0%B1%D0%B8%D0%B1%D0%BB%D0%B8%D0%BE%D1%82%D0%B5%D0%BA)
 ### Update
-- I recommend always updating the library: errors and bugs are corrected in the new versions, as well as optimization and new features are added
-- through the IDE library manager: find the library how to install and click "update"
-- Manually: ** remove the folder with the old version **, and then put a new one in its place.“Replacement” cannot be done: sometimes in new versions, files that remain when replacing are deleted and can lead to errors!
+- I recommend always updating the library: new versions fix errors and bugs, as well as optimize and add new features.
+- Through the library manager IDE: find the library as when installing and click "Update"
+- Manually: **Delete the folder with the old version** and then put the new one in its place. “Replacement” can not be done: sometimes new versions delete files that will remain when replaced and can lead to errors!
 
-<a id="feedback"> </a>
+<a id="feedback"></a>
 
-## bugs and feedback
-Create ** Issue ** when you find the bugs, and better immediately write to the mail [alex@alexgyver.ru] (mailto: alex@alexgyver.ru)
-The library is open for refinement and your ** pull Request ** 'ow!
+## Bugs and feedback
+If you find bugs, create **Issue**, or better write to the mail immediately.[alex@alexgyver.ru](mailto:alex@alexgyver.ru)  
+The library is open for revision and your **Pull Requests*!
 
-When reporting about bugs or incorrect work of the library, it is necessary to indicate:
-- The version of the library
-- What is MK used
+When reporting bugs or incorrect work of the library, it is necessary to specify:
+- Library version
+- What is used by the IC
 - SDK version (for ESP)
-- version of Arduino ide
-- Is it correctCranberries are built -in examples that use the functions and designs that lead to a bug in your code
-- what code has been loaded, what work was expected from it and how it works in reality
-- Ideally, attach the minimum code in which the bug is observed.Not a canvas of a thousand lines, but a minimum code
+- Arduino IDE version
+- Are embedded examples that use features and designs that cause bugs in your code working correctly?
+- What code was downloaded, what work was expected from it and how it works in reality
+- Ideally, attach the minimum code in which the bug is observed. Not a canvas of a thousand lines, but a minimum code.
