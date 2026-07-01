@@ -27,6 +27,8 @@ PGM_STR_LIST(pstrlist, "string 1", "kek", "hello");
 PGM_STR_LIST_OBJ(pstrlist_obj, "str1", "str2", "str3");
 
 void setup() {
+    Serial.begin(115200);
+
     Serial.println(pgm_read(&vali));  // 123
     Serial.println(pgm_read(&valf));  // 3.14
 
@@ -37,7 +39,7 @@ void setup() {
     pgm::PString pstr(pgmstr);
     Serial.println(pstr);
     Serial.println(pstr.length());
-    for (int i = 0; i < pstr.length(); i++) {
+    for (size_t i = 0; i < pstr.length(); i++) {
         Serial.print(pstr[i]);
     }
     Serial.println();
@@ -69,7 +71,7 @@ void setup() {
     Serial.println(list[0] == "string 1");
 
     // str1, str2, str3
-    for (int i = 0; i < pstrlist_obj.length(); i++) {
+    for (size_t i = 0; i < pstrlist_obj.length(); i++) {
         Serial.println(pstrlist_obj[i]);
     }
 }

@@ -196,8 +196,8 @@ void foo() {
 
   // Use f str() when working with String!
   // It's best.
-  String s = pgmstr.f_str();
-  s += pgmstr.f_str();
+  String s = pstr.f_str();
+  s += pstr.f_str();
 }
 ```
 

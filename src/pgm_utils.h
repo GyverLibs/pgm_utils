@@ -30,7 +30,7 @@
 // поместить строки в PROGMEM и в список указателей под именем name
 #define PGM_STR_LIST_STATIC(name, ...)             \
     FOR_MACRO(_MAKE_STR_STATIC, name, __VA_ARGS__) \
-    const char* const name[] PROGMEM = {FOR_MACRO(_MAKE_LIST, name, __VA_ARGS__)};
+    static const char* const name[] PROGMEM = {FOR_MACRO(_MAKE_LIST, name, __VA_ARGS__)};
 
 // поместить строки в PROGMEM и в список указателей + создать объект StringList с именем name
 #define PGM_STR_LIST_OBJ(name, ...)        \
@@ -176,7 +176,7 @@ class PString : public Printable {
     }
 
     // вывести в String
-    String toString(char* buf) const {
+    String toString() const {
         return String(f_str());
     }
 

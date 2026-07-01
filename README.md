@@ -194,8 +194,8 @@ void foo() {
 
   // при работе со String используй f_str()!
   // это оптимальнее всего
-  String s = pgmstr.f_str();
-  s += pgmstr.f_str();
+  String s = pstr.f_str();
+  s += pstr.f_str();
 }
 ```
 
